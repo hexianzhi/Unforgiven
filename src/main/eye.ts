@@ -61,7 +61,7 @@ export const hideWindow = () => {
 
 export const showWindow = () => {
   // mainWindow?.setAlwaysOnTop(true, 'screen-saver', 10); // 貌似不用
-  mainWindow?.show();
+  mainWindow?.showInactive();
   mainWindow?.moveTop();
 };
 
