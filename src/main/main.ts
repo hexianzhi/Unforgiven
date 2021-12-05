@@ -14,10 +14,11 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from './menu';
+// import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 // import db from './db';
 import sql from './sql';
+import eye from './eye';
 
 export default class AppUpdater {
   constructor() {
@@ -100,9 +101,6 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
-
   // Open urls in the user's browser
   mainWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault();
@@ -129,7 +127,17 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
+    // sql.main();
+
     createWindow();
+    eye.createEyeWindow();
+    setInterval(() => {
+      eye.showWindow();
+      setTimeout(() => {
+        eye.hideWindow();
+      }, 2 * 1000);
+    }, 10 * 1000);
+
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
