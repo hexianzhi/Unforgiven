@@ -1,11 +1,11 @@
+import exp from 'constants';
 import { app } from 'electron';
 import path from 'path';
-console.log('sql  ');
+import { Sequelize, Model, DataTypes } from 'Sequelize';
 
-const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: path.join(app.getPath('desktop'), 'test.sqlite'),
+  storage: path.join(app.getPath('desktop'), 'test.db'),
 });
 
 class User extends Model {}
@@ -17,7 +17,7 @@ User.init(
   { sequelize, modelName: 'user' }
 );
 const main = async () => {
-  console.log('sql main');
+  console.log('sql create');
   await sequelize.sync();
   const jane = await User.create({
     username: 'janedoe',
@@ -33,4 +33,38 @@ const main = async () => {
   }
 };
 
-export default { main };
+export const addUser = async (user: any) => {
+  console.log('addUser user: ', user);
+  User.create(user);
+};
+
+export const deleteUser = async ({ name }) => {
+  await User.destroy({
+    where: {
+      username: name,
+    },
+  });
+};
+
+export const updateUser = async ({ originName, newName }) => {
+  await User.update(
+    { username: newName },
+    {
+      where: {
+        username: originName,
+      },
+    }
+  );
+};
+
+export const findUser = async ({ username }) => {
+  // 查询所有用户
+  const users = await User.findAll({
+    where: {
+      username,
+    },
+  });
+  return users;
+};
+
+export default { main, addUser, deleteUser, updateUser, findUser };
