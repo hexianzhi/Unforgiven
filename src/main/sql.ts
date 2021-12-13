@@ -17,7 +17,6 @@ User.init(
   { sequelize, modelName: 'user' }
 );
 const main = async () => {
-  console.log('sql create');
   await sequelize.sync();
   const jane = await User.create({
     username: 'janedoe',
@@ -60,6 +59,7 @@ export const updateUser = async ({ originName, newName }) => {
 export const findUser = async ({ username }) => {
   // 查询所有用户
   const users = await User.findAll({
+    raw: true,
     where: {
       username,
     },

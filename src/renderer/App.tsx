@@ -10,7 +10,7 @@ const Hello = () => {
 
   useEffect(() => {
     console.log('window: ', window);
-    myWindow.electron.ipcRenderer.on('sql', (event, ...args) => {
+    myWindow.electron.ipcRenderer.on('sql', (args) => {
       console.log('ipcRenderer args: ', args);
     });
   }, []);
