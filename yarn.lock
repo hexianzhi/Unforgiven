@@ -8748,7 +8748,7 @@ sprintf-js@~1.0.2:
 
 sqlite3@^5.0.2:
   version "5.0.2"
-  resolved "https://pkg.vankeservice.com/repository/npm-public/sqlite3/-/sqlite3-5.0.2.tgz#00924adcc001c17686e0a6643b6cbbc2d3965083"
+  resolved "https://registry.npmmirror.com/sqlite3/download/sqlite3-5.0.2.tgz?cache=0&sync_timestamp=1636973271665&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsqlite3%2Fdownload%2Fsqlite3-5.0.2.tgz#00924adcc001c17686e0a6643b6cbbc2d3965083"
   integrity sha1-AJJK3MABwXaG4KZkO2y7wtOWUIM=
   dependencies:
     node-addon-api "^3.0.0"

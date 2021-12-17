@@ -1,8 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron');
-window.ipcRenderer = ipcRenderer;
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
+    myPing() {
+      ipcRenderer.send('ipc-example', 'ping');
+    },
     send(method, ...args) {
       ipcRenderer.send('sql', method, args);
     },
